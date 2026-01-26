@@ -1,0 +1,15 @@
+[
+  {
+    "id": "convidado_1768867045835_gqz6ugc7o",
+    "nome": "luiz",
+    "login": "tester",
+    "senha": "$2a$10$aYV3hbCtY39/1HHEy4GaxObBE7Hx4uceucxar64RZIK71P3Cw0LN2",
+    "permissoes": [
+      "Ver Punições",
+      "Ver Infrações"
+    ],
+    "status": "Ativo",
+    "dataCriacao": "19/01/2026",
+    "horaCriacao": "20:57"
+  }
+]

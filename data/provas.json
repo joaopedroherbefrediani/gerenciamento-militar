@@ -1,0 +1,73 @@
+[
+  {
+    "nomeConscrito": "asdas",
+    "nomeInstrutor": "asd",
+    "questoes": [
+      {
+        "id": "geral-2",
+        "numero": 1,
+        "texto": "O que é insubordinação, desacato e corrupção?",
+        "categoria": "Geral"
+      },
+      {
+        "id": "geral-4",
+        "numero": 2,
+        "texto": "O que é considerado uma ronda ostensiva?",
+        "categoria": "Geral"
+      },
+      {
+        "id": "codigos-q-2",
+        "numero": 3,
+        "texto": "O que significa QSJ?",
+        "categoria": "Códigos Q"
+      },
+      {
+        "id": "codigos-q-3",
+        "numero": 4,
+        "texto": "O que significa QSM?",
+        "categoria": "Códigos Q"
+      },
+      {
+        "id": "codigos-q-4",
+        "numero": 5,
+        "texto": "O que significa QRX?",
+        "categoria": "Códigos Q"
+      },
+      {
+        "id": "codigos-ptr-1",
+        "numero": 6,
+        "texto": "Quando o Código 5 pode ser liberado?",
+        "categoria": "Códigos de PTR"
+      },
+      {
+        "id": "codigos-ptr-2",
+        "numero": 7,
+        "texto": "Em quais situações é feito um QTA de um acompanhamento em rede? Cite exemplos.",
+        "categoria": "Códigos de PTR"
+      },
+      {
+        "id": "situacoes-3",
+        "numero": 8,
+        "texto": "Realize uma simulação de uma situação de QRU de disparo de arma de fogo.",
+        "categoria": "Situações"
+      },
+      {
+        "id": "situacoes-6",
+        "numero": 9,
+        "texto": "Na capital, o que ocorre quando um indivíduo em um pinote lança o veículo em direção ao mar permanecendo dentro dele?",
+        "categoria": "Situações"
+      },
+      {
+        "id": "situacoes-8",
+        "numero": 10,
+        "texto": "Qual seria sua reação ao ser abordado por um veículo blindado com quatro indivíduos fortemente armados, estando você acompanhado apenas de um parceiro de farda?",
+        "categoria": "Situações"
+      }
+    ],
+    "dataCriacao": "20/01/2026",
+    "horaCriacao": "16:08:21",
+    "pontuacaoMinima": 8,
+    "avaliacoes": {},
+    "id": "prova_1768936102106_a0cyush"
+  }
+]
