@@ -7,6 +7,8 @@ import { logActivity } from '@/lib/activity-log'
 import CriarCursoModal, { Curso, CursoImportancia } from '@/components/CriarCursoModal'
 import ConfirmarExclusaoCursoModal from '@/components/ConfirmarExclusaoCursoModal'
 import AnexarMaterialCursoModal from '@/components/AnexarMaterialCursoModal'
+import ConfirmarExclusaoMaterialCursoModal from '@/components/ConfirmarExclusaoMaterialCursoModal'
+import InformacaoModal from '@/components/InformacaoModal'
 
 type CursoMaterial = {
   id: string
@@ -27,6 +29,10 @@ export default function CursosPage() {
   const [isAnexarModalOpen, setIsAnexarModalOpen] = useState(false)
   const [cursoEditando, setCursoEditando] = useState<Curso | null>(null)
   const [cursoParaExcluir, setCursoParaExcluir] = useState<Curso | null>(null)
+  const [isExcluirMaterialModalOpen, setIsExcluirMaterialModalOpen] = useState(false)
+  const [materialParaExcluir, setMaterialParaExcluir] = useState<CursoMaterial | null>(null)
+  const [isCursoJaTemMaterialModalOpen, setIsCursoJaTemMaterialModalOpen] = useState(false)
+  const [cursoJaTemMaterialNome, setCursoJaTemMaterialNome] = useState('')
 
   const { data: cursosRaw, refresh: refreshCursos } = useDataSync<Curso>({ entity: 'cursos', pollingInterval: 2000 })
   const { data: materiaisRaw, refresh: refreshMateriais } = useDataSync<CursoMaterial>({
@@ -101,6 +107,13 @@ export default function CursosPage() {
   }
 
   const handleUploadMaterial = async (courseId: string, file: File) => {
+    const jaExiste = materiais.some((m) => m.courseId === courseId)
+    if (jaExiste) {
+      setCursoJaTemMaterialNome(cursoNomeById.get(courseId) || 'Curso')
+      setIsCursoJaTemMaterialModalOpen(true)
+      return
+    }
+
     const form = new FormData()
     form.append('courseId', courseId)
     form.append('file', file)
@@ -111,6 +124,11 @@ export default function CursosPage() {
     })
     const j = await res.json().catch(() => null)
     if (!res.ok || !j?.success) {
+      if (res.status === 409) {
+        setCursoJaTemMaterialNome(cursoNomeById.get(courseId) || 'Curso')
+        setIsCursoJaTemMaterialModalOpen(true)
+        return
+      }
       alert(j?.error || 'Erro ao anexar material.')
       return
     }
@@ -128,8 +146,6 @@ export default function CursosPage() {
   }
 
   const handleDeleteMaterial = async (material: CursoMaterial) => {
-    const ok = confirm('Tem certeza que deseja deletar este material?')
-    if (!ok) return
     const res = await fetch(`/api/data/cursos-materiais?id=${encodeURIComponent(material.id)}`, { method: 'DELETE' })
     const j = await res.json().catch(() => null)
     if (!res.ok || !j?.success) {
@@ -323,7 +339,10 @@ export default function CursosPage() {
                       </a>
                       {podeEditar && (
                         <button
-                          onClick={() => handleDeleteMaterial(m)}
+                          onClick={() => {
+                            setMaterialParaExcluir(m)
+                            setIsExcluirMaterialModalOpen(true)
+                          }}
                           className="inline-flex items-center justify-center px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors font-medium text-sm"
                         >
                           Deletar Material
@@ -367,6 +386,34 @@ export default function CursosPage() {
           onClose={() => setIsAnexarModalOpen(false)}
           cursos={cursos}
           onUpload={handleUploadMaterial}
+        />
+      )}
+
+      {isExcluirMaterialModalOpen && materialParaExcluir && podeEditar && (
+        <ConfirmarExclusaoMaterialCursoModal
+          isOpen={isExcluirMaterialModalOpen}
+          onClose={() => {
+            setIsExcluirMaterialModalOpen(false)
+            setMaterialParaExcluir(null)
+          }}
+          onConfirm={async () => {
+            const m = materialParaExcluir
+            if (!m) return
+            await handleDeleteMaterial(m)
+            setIsExcluirMaterialModalOpen(false)
+            setMaterialParaExcluir(null)
+          }}
+          cursoNome={cursoNomeById.get(materialParaExcluir.courseId) || 'Curso'}
+          materialNome={materialParaExcluir.originalName}
+        />
+      )}
+
+      {isCursoJaTemMaterialModalOpen && (
+        <InformacaoModal
+          isOpen={isCursoJaTemMaterialModalOpen}
+          onClose={() => setIsCursoJaTemMaterialModalOpen(false)}
+          titulo="Material já anexado"
+          mensagem={`O curso "${cursoJaTemMaterialNome}" já possui um material anexado. Para anexar outro, delete o material atual primeiro.`}
         />
       )}
     </div>

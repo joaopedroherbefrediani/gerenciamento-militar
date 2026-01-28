@@ -76,6 +76,49 @@ export async function GET(request: NextRequest) {
   }
 }
 
+export async function HEAD(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+    const download = searchParams.get('download')
+    if (!id || !download) {
+      return new NextResponse(null, { status: 200 })
+    }
+
+    const materiais = await dataStore.getCursosMateriais()
+    const material = materiais.find((m: any) => m.id === id)
+    if (!material) {
+      return new NextResponse(null, { status: 404 })
+    }
+
+    if (material.storage === 'public' && material.fileName) {
+      return NextResponse.redirect(new URL(`/cursos-materials/${material.fileName}`, request.url))
+    }
+
+    const redis = await getRedis()
+    if (!redis) {
+      return new NextResponse(null, { status: 500 })
+    }
+    const base64 = await redis.get(REDIS_FILE_KEY_PREFIX + id)
+    if (!base64) {
+      return new NextResponse(null, { status: 404 })
+    }
+    const buf = Buffer.from(base64, 'base64')
+    const filename = String(material.originalName || 'material.pdf').replace(/"/g, '')
+    return new NextResponse(null, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': String(buf.length),
+        'Cache-Control': 'no-store',
+      },
+    })
+  } catch (e) {
+    return new NextResponse(null, { status: 500 })
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const form = await request.formData()
@@ -96,6 +139,14 @@ export async function POST(request: NextRequest) {
     }
 
     const materiais = await dataStore.getCursosMateriais()
+    const jaExiste = materiais.some((m: any) => m?.courseId === courseIdParsed)
+    if (jaExiste) {
+      return NextResponse.json(
+        { success: false, error: 'Este curso já possui um material anexado.' },
+        { status: 409 }
+      )
+    }
+
     const id = `mat_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
     const novoMaterial: any = {
       id,
