@@ -48,6 +48,8 @@ export async function middleware(request: NextRequest) {
       "base-uri 'self'",
       "object-src 'none'",
       "frame-ancestors 'none'",
+      // Permitir iframe do YouTube (TAF)
+      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
       "form-action 'self'",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data: https:",

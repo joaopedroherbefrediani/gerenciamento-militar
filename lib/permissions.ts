@@ -13,6 +13,7 @@ export const PERMISSOES_ROTAS: Record<string, string[]> = {
   '/dashboard/templates': ['view_templates'],
   '/dashboard/logs': ['view_logs'],
   '/dashboard/recrutamento': ['view_recrutamento'],
+  '/dashboard/recrutamento/taf': ['edit_recrutamento'],
   '/dashboard/kanban': ['view_kanban'],
 }
 
