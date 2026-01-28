@@ -134,19 +134,8 @@ const navItems: NavItem[] = [
     name: 'Instrutores',
     href: '/dashboard/instrutores',
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 14l9-5-9-5-9 5 9 5z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 14l6.16-3.422A12.083 12.083 0 0119 15.156c0 1.657-.224 3.266-.64 4.788L12 17l-6.36 3.366A12.083 12.083 0 015 15.156c0-1.6.268-3.143.76-4.578L12 14z"
-        />
+      <svg className="w-5 h-5" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+        <path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z" />
       </svg>
     ),
   },

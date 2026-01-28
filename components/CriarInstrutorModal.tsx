@@ -189,7 +189,7 @@ export default function CriarInstrutorModal({
                 <select
                   value={militarId}
                   onChange={(e) => setMilitarId(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none bg-white"
+                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none bg-white appearance-none"
                   required
                 >
                   <option value="">Selecione um militar...</option>
