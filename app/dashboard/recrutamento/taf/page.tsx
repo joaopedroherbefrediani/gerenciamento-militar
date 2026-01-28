@@ -28,12 +28,6 @@ export default function RecrutamentoTAFPage() {
         <div className="text-center max-w-md px-4">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Acesso Negado</h2>
           <p className="text-gray-600 mb-5">Você não tem permissão para acessar o conteúdo do TAF.</p>
-          <button
-            onClick={() => router.push('/dashboard/recrutamento')}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-          >
-            Voltar para Recrutamento
-          </button>
         </div>
       </div>
     )
@@ -91,7 +85,7 @@ export default function RecrutamentoTAFPage() {
           </div>
         </div>
 
-        {(isAdmin || temPermissao('edit_recrutamento')) && (
+        {podeAcessar && (
           <div className="flex justify-center pt-2">
             <a
               href="/recrutamento-taf.pdf"
