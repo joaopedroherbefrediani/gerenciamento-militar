@@ -32,15 +32,6 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    name: 'Cargos',
-    href: '/dashboard/cargos',
-    icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 -960 960 960">
-        <path d="m387-412 35-114-92-74h114l36-112 36 112h114l-93 74 35 114-92-71-93 71ZM240-40v-309q-38-42-59-96t-21-115q0-134 93-227t227-93q134 0 227 93t93 227q0 61-21 115t-59 96v309l-240-80-240 80Zm240-280q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70ZM320-159l160-41 160 41v-124q-35 20-75.5 31.5T480-240q-44 0-84.5-11.5T320-283v124Zm160-62Z" />
-      </svg>
-    ),
-  },
-  {
     name: 'Ações',
     href: '/dashboard/acoes',
     icon: (
@@ -68,6 +59,43 @@ const navItems: NavItem[] = [
     ),
   },
   {
+    name: 'Cargos',
+    href: '/dashboard/cargos',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 -960 960 960">
+        <path d="m387-412 35-114-92-74h114l36-112 36 112h114l-93 74 35 114-92-71-93 71ZM240-40v-309q-38-42-59-96t-21-115q0-134 93-227t227-93q134 0 227 93t93 227q0 61-21 115t-59 96v309l-240-80-240 80Zm240-280q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70ZM320-159l160-41 160 41v-124q-35 20-75.5 31.5T480-240q-44 0-84.5-11.5T320-283v124Zm160-62Z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Instrutores',
+    href: '/dashboard/instrutores',
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+        <path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Cursos',
+    href: '/dashboard/cursos',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.84 4.578c0 1.657-.224 3.266-.64 4.788L12 17l-6.36 3.366A12.083 12.083 0 015 15.156c0-1.6.268-3.143.76-4.578L12 14z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Recrutamento',
+    href: '/dashboard/recrutamento',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+  },
+  {
     name: 'Relatórios',
     href: '/dashboard/relatorios',
     icon: (
@@ -77,11 +105,11 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    name: 'Convidados',
-    href: '/dashboard/convidados',
+    name: 'Kanban',
+    href: '/dashboard/kanban',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
       </svg>
     ),
   },
@@ -104,15 +132,6 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    name: 'Kanban',
-    href: '/dashboard/kanban',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
-      </svg>
-    ),
-  },
-  {
     name: 'Logs',
     href: '/dashboard/logs',
     icon: (
@@ -122,30 +141,11 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    name: 'Recrutamento',
-    href: '/dashboard/recrutamento',
+    name: 'Convidados',
+    href: '/dashboard/convidados',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Instrutores',
-    href: '/dashboard/instrutores',
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
-        <path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Cursos',
-    href: '/dashboard/cursos',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.84 4.578c0 1.657-.224 3.266-.64 4.788L12 17l-6.36 3.366A12.083 12.083 0 015 15.156c0-1.6.268-3.143.76-4.578L12 14z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     ),
   },
