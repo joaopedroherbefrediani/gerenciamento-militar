@@ -71,7 +71,7 @@ export default function RecrutamentoTAFPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-5 sm:p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-gray-900">Vídeo</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Vídeo apresentação</h2>
         <div className="w-full overflow-hidden rounded-lg border border-gray-200 bg-black">
           <div className="aspect-video">
             <iframe

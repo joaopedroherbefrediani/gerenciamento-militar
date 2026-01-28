@@ -98,4 +98,10 @@ export const dataStore = {
 
   getKanban: () => readDataFile<any>('kanban.json'),
   saveKanban: (data: any[]) => writeDataFile('kanban.json', data),
+
+  getCursos: () => readDataFile<any>('cursos.json'),
+  saveCursos: (data: any[]) => writeDataFile('cursos.json', data),
+
+  getCursosMateriais: () => readDataFile<any>('cursos-materiais.json'),
+  saveCursosMateriais: (data: any[]) => writeDataFile('cursos-materiais.json', data),
 }

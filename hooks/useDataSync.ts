@@ -1,6 +1,19 @@
 import { useState, useEffect, useCallback } from 'react'
 
-type EntityType = 'militares' | 'cargos' | 'acoes' | 'infracoes' | 'punicoes' | 'webhooks' | 'templates' | 'provas' | 'eventos' | 'activities' | 'kanban'
+type EntityType =
+  | 'militares'
+  | 'cargos'
+  | 'acoes'
+  | 'infracoes'
+  | 'punicoes'
+  | 'webhooks'
+  | 'templates'
+  | 'provas'
+  | 'eventos'
+  | 'activities'
+  | 'kanban'
+  | 'cursos'
+  | 'cursos-materiais'
 
 interface UseDataSyncOptions {
   entity: EntityType

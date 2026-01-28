@@ -64,6 +64,8 @@ export default function LogsPage() {
       template: 'Template',
       convidado: 'Convidado',
       kanban: 'Kanban',
+      curso: 'Curso',
+      curso_material: 'Material do Curso',
     }
     return traducoes[entity] || entity
   }

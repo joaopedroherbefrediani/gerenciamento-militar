@@ -1,5 +1,17 @@
 export type ActivityType = 'created' | 'updated' | 'deleted'
-export type ActivityEntity = 'militar' | 'cargo' | 'acao' | 'infracao' | 'punicao' | 'evento' | 'webhook' | 'template' | 'convidado' | 'kanban'
+export type ActivityEntity =
+  | 'militar'
+  | 'cargo'
+  | 'acao'
+  | 'infracao'
+  | 'punicao'
+  | 'evento'
+  | 'webhook'
+  | 'template'
+  | 'convidado'
+  | 'kanban'
+  | 'curso'
+  | 'curso_material'
 
 export interface Activity {
   id: string

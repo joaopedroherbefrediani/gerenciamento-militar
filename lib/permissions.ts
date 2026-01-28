@@ -14,6 +14,7 @@ export const PERMISSOES_ROTAS: Record<string, string[]> = {
   '/dashboard/logs': ['view_logs'],
   '/dashboard/recrutamento': ['view_recrutamento'],
   '/dashboard/recrutamento/taf': ['view_recrutamento'],
+  '/dashboard/cursos': ['view_cursos'],
   '/dashboard/kanban': ['view_kanban'],
 }
 
