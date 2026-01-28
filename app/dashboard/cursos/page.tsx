@@ -191,16 +191,6 @@ export default function CursosPage() {
         {podeEditar && (
           <div className="flex flex-wrap justify-start sm:justify-end gap-2">
             <button
-              onClick={() => setIsAnexarModalOpen(true)}
-              className="whitespace-nowrap px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2 text-sm lg:px-6 lg:py-3 lg:text-base"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v4a2 2 0 002 2h12a2 2 0 002-2v-4" />
-              </svg>
-              Anexar Material
-            </button>
-
-            <button
               onClick={() => {
                 setCursoEditando(null)
                 setIsCriarModalOpen(true)
@@ -299,9 +289,23 @@ export default function CursosPage() {
 
       {/* Materiais */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="p-4 sm:p-6 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Materiais para Download</h2>
-          <p className="text-sm text-gray-600 mt-1">Arquivos PDF anexados aos cursos.</p>
+        <div className="p-4 sm:p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">Materiais para Download</h2>
+            <p className="text-sm text-gray-600 mt-1">Arquivos PDF anexados aos cursos.</p>
+          </div>
+
+          {podeEditar && (
+            <button
+              onClick={() => setIsAnexarModalOpen(true)}
+              className="w-full sm:w-auto whitespace-nowrap px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2 text-sm lg:px-6 lg:py-3 lg:text-base"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v4a2 2 0 002 2h12a2 2 0 002-2v-4" />
+              </svg>
+              Anexar Material
+            </button>
+          )}
         </div>
 
         <div className="p-4 sm:p-6">

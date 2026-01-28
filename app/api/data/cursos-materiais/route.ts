@@ -12,6 +12,16 @@ export const maxDuration = 30
 const PUBLIC_MATERIAIS_DIR = path.join(process.cwd(), 'public', 'cursos-materials')
 const REDIS_FILE_KEY_PREFIX = 'curso-material:'
 
+function tryReadPublicFile(fileName: string): Buffer | null {
+  try {
+    const fp = path.join(PUBLIC_MATERIAIS_DIR, fileName)
+    if (!fs.existsSync(fp)) return null
+    return fs.readFileSync(fp)
+  } catch {
+    return null
+  }
+}
+
 function ensureDir() {
   try {
     if (!fs.existsSync(PUBLIC_MATERIAIS_DIR)) fs.mkdirSync(PUBLIC_MATERIAIS_DIR, { recursive: true })
@@ -43,8 +53,24 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ success: false, error: 'Material não encontrado' }, { status: 404 })
       }
 
-      // Se o arquivo está em public, redirecionar para a rota estática
-      if (material.storage === 'public' && material.fileName) {
+      // Compat: materiais antigos podem não ter "storage"
+      const storage = material.storage || (material.fileName ? 'public' : 'redis')
+
+      // Se o arquivo está em public, tentar servir/redirect
+      if (storage === 'public' && material.fileName) {
+        // Primeiro tenta ler direto do fs (mais robusto para alguns clientes)
+        const buf = tryReadPublicFile(String(material.fileName))
+        if (buf) {
+          const filename = String(material.originalName || 'material.pdf')
+          return new NextResponse(buf as unknown as BodyInit, {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/pdf',
+              'Content-Disposition': `attachment; filename="${filename.replace(/"/g, '')}"`,
+              'Cache-Control': 'no-store',
+            },
+          })
+        }
         return NextResponse.redirect(new URL(`/cursos-materials/${material.fileName}`, request.url))
       }
 
@@ -91,7 +117,9 @@ export async function HEAD(request: NextRequest) {
       return new NextResponse(null, { status: 404 })
     }
 
-    if (material.storage === 'public' && material.fileName) {
+    const storage = material.storage || (material.fileName ? 'public' : 'redis')
+
+    if (storage === 'public' && material.fileName) {
       return NextResponse.redirect(new URL(`/cursos-materials/${material.fileName}`, request.url))
     }
 
