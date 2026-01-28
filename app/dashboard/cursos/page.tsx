@@ -176,7 +176,7 @@ export default function CursosPage() {
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <button
               onClick={() => setIsAnexarModalOpen(true)}
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2 text-sm sm:text-base"
+              className="px-4 md:px-6 py-2 md:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2 text-sm md:text-base"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v4a2 2 0 002 2h12a2 2 0 002-2v-4" />
@@ -189,7 +189,7 @@ export default function CursosPage() {
                 setCursoEditando(null)
                 setIsCriarModalOpen(true)
               }}
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2 text-sm sm:text-base"
+              className="px-4 md:px-6 py-2 md:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2 text-sm md:text-base"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -226,11 +226,11 @@ export default function CursosPage() {
                 </tr>
               ) : (
                 cursos.map((curso) => (
-                  <tr key={curso.id} className="group hover:bg-gray-50">
+                  <tr key={curso.id} className="hover:bg-gray-50">
                     <td className="px-4 sm:px-6 py-4 text-sm font-medium text-gray-900">{curso.nome}</td>
                     <td className="px-4 sm:px-6 py-4 text-sm text-gray-700">{importanciaLabel(curso.importancia)}</td>
                     <td className="px-4 sm:px-6 py-4 text-right">
-                      <div className="inline-flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                      <div className="inline-flex gap-1">
                         {podeEditar ? (
                           <>
                             <button
@@ -295,7 +295,7 @@ export default function CursosPage() {
             <div className="space-y-3">
               {materiais.map((m) => {
                 const cursoNome = cursoNomeById.get(m.courseId) || 'Curso removido'
-                const href = `/cursos-materials/${m.fileName}`
+                const href = `/api/data/cursos-materiais?id=${encodeURIComponent(m.id)}&download=1`
                 return (
                   <div
                     key={m.id}
