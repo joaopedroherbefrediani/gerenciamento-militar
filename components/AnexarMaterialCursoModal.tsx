@@ -26,11 +26,12 @@ export default function AnexarMaterialCursoModal({
 
   useEffect(() => {
     if (isOpen) {
-      setCourseId(cursos?.[0]?.id || '')
-      setFile(null)
+      // Importante: não resetar o arquivo ao atualizar a lista (polling),
+      // senão o usuário seleciona o PDF e ele "some" antes de anexar.
+      setCourseId((prev) => prev || cursos?.[0]?.id || '')
       setIsEnviando(false)
     }
-  }, [isOpen, cursos])
+  }, [isOpen])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,7 +43,9 @@ export default function AnexarMaterialCursoModal({
       alert('Selecione um arquivo PDF.')
       return
     }
-    if (!file.name.toLowerCase().endsWith('.pdf')) {
+    const nome = file.name || ''
+    const isPdf = (file.type && file.type.toLowerCase() === 'application/pdf') || nome.toLowerCase().endsWith('.pdf')
+    if (!isPdf) {
       alert('Apenas arquivos .pdf são permitidos.')
       return
     }

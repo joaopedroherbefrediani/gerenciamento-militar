@@ -25,6 +25,7 @@ const TODAS_PERMISSOES = [
   { group: 'Webhooks', permissions: [{ id: 'view_webhooks', label: 'Ver Webhooks' }, { id: 'edit_webhooks', label: 'Editar Webhooks' }] },
   { group: 'Templates', permissions: [{ id: 'view_templates', label: 'Ver Templates' }, { id: 'edit_templates', label: 'Editar Templates' }] },
   { group: 'Kanban', permissions: [{ id: 'view_kanban', label: 'Ver Kanban' }, { id: 'edit_kanban', label: 'Editar Kanban' }] },
+  { group: 'Cursos', permissions: [{ id: 'view_cursos', label: 'Ver Cursos' }, { id: 'edit_cursos', label: 'Editar Cursos' }] },
   { group: 'Logs', permissions: [{ id: 'view_logs', label: 'Ver Logs' }] },
   { group: 'Recrutamento', permissions: [{ id: 'view_recrutamento', label: 'Ver Recrutamento' }] },
   { group: 'Convidados', permissions: [{ id: 'view_convidados', label: 'Ver Convidados' }, { id: 'edit_convidados', label: 'Editar Convidados' }] },
