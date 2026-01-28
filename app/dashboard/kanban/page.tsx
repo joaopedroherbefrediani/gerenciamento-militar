@@ -246,12 +246,12 @@ export default function KanbanPage() {
 
       {/* Legenda dos Tipos */}
       <div className="bg-white border border-gray-200 rounded-xl p-4">
-        <h3 className="font-bold text-gray-900 mb-3">Legenda de Tipos</h3>
+        <h3 className="font-bold text-gray-900 mb-3">Legenda de criação</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-3">
           {KANBAN_TIPOS.map((t) => (
-            <div key={t.value} className="flex items-start gap-3 rounded-lg border border-gray-100 bg-gray-50/60 p-3">
+            <div key={t.value} className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50/60 p-3">
               <span
-                className={`mt-0.5 inline-flex shrink-0 items-center px-2 py-1 text-xs font-bold rounded-full border ${t.badgeClassName}`}
+                className={`inline-flex shrink-0 items-center px-2 py-1 text-xs font-bold rounded-full border ${t.badgeClassName}`}
               >
                 {t.label}
               </span>
