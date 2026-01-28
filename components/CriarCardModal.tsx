@@ -2,19 +2,21 @@
 
 import { useState, useEffect } from 'react'
 import BaseModal from '@/components/BaseModal'
+import { KANBAN_TIPOS, KanbanCardTipo, normalizeKanbanTipo } from '@/lib/kanban-tipos'
 
 interface Card {
   id: string
   titulo: string
   descricao: string
   status: 'fazer' | 'fazendo' | 'feito'
+  tipo?: KanbanCardTipo
 }
 
 interface CriarCardModalProps {
   isOpen: boolean
   onClose: () => void
-  onCreate: (dados: { titulo: string; descricao: string; status: 'fazer' | 'fazendo' | 'feito' }) => void
-  onUpdate: (dados: { id: string; titulo: string; descricao: string; status: 'fazer' | 'fazendo' | 'feito' }) => void
+  onCreate: (dados: { titulo: string; descricao: string; status: 'fazer' | 'fazendo' | 'feito'; tipo: KanbanCardTipo }) => void
+  onUpdate: (dados: { id: string; titulo: string; descricao: string; status: 'fazer' | 'fazendo' | 'feito'; tipo: KanbanCardTipo }) => void
   cardEditando?: Card | null
   visualizarApenas?: boolean
 }
@@ -30,6 +32,7 @@ export default function CriarCardModal({
   const [titulo, setTitulo] = useState('')
   const [descricao, setDescricao] = useState('')
   const [status, setStatus] = useState<'fazer' | 'fazendo' | 'feito'>('fazer')
+  const [tipo, setTipo] = useState<KanbanCardTipo>('TAREFA')
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -41,10 +44,12 @@ export default function CriarCardModal({
       setTitulo(cardEditando.titulo)
       setDescricao(cardEditando.descricao)
       setStatus(cardEditando.status)
+      setTipo(normalizeKanbanTipo(cardEditando.tipo))
     } else {
       setTitulo('')
       setDescricao('')
       setStatus('fazer')
+      setTipo('TAREFA')
     }
   }, [cardEditando, isOpen])
 
@@ -57,9 +62,9 @@ export default function CriarCardModal({
     }
 
     if (cardEditando) {
-      onUpdate({ id: cardEditando.id, titulo: titulo.trim(), descricao: descricao.trim(), status })
+      onUpdate({ id: cardEditando.id, titulo: titulo.trim(), descricao: descricao.trim(), status, tipo })
     } else {
-      onCreate({ titulo: titulo.trim(), descricao: descricao.trim(), status })
+      onCreate({ titulo: titulo.trim(), descricao: descricao.trim(), status, tipo })
     }
 
     onClose()
@@ -116,6 +121,25 @@ export default function CriarCardModal({
                 required
                 disabled={visualizarApenas}
               />
+            </div>
+
+            <div>
+              <label htmlFor="tipo" className="block text-sm font-medium text-gray-700 mb-1">
+                Tipo
+              </label>
+              <select
+                id="tipo"
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value as KanbanCardTipo)}
+                disabled={visualizarApenas}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none disabled:bg-gray-50"
+              >
+                {KANBAN_TIPOS.map((t) => (
+                  <option key={t.value} value={t.value}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {!visualizarApenas && (

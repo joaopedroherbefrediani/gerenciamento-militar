@@ -9,12 +9,15 @@ import { useDataSync, useDataMutation } from '@/hooks/useDataSync'
 import CriarCardModal from '@/components/CriarCardModal'
 import ConfirmarExclusaoModal from '@/components/ConfirmarExclusaoModal'
 import { migrateLocalStorageToAPI } from '@/lib/migrate-data'
+import { KANBAN_TIPOS, KanbanCardTipo, getKanbanTipoBadgeClassName, getKanbanTipoLabel, normalizeKanbanTipo } from '@/lib/kanban-tipos'
 
 interface Card {
   id: string
   titulo: string
   descricao: string
   status: 'fazer' | 'fazendo' | 'feito'
+  tipo?: KanbanCardTipo
+  ordem?: number
 }
 
 const COLUNAS = [
@@ -48,20 +51,56 @@ export default function KanbanPage() {
     }
   }, [])
 
+  const orderIndexById = new Map((cards || []).map((c, idx) => [c.id, idx] as const))
+  const getOrderKey = (c: Card) => (typeof c.ordem === 'number' ? c.ordem : (orderIndexById.get(c.id) ?? 0))
+  const getCardsOrdenados = (status: Card['status']) =>
+    (cards || []).filter((c) => c.status === status).slice().sort((a, b) => getOrderKey(a) - getOrderKey(b))
+  const getProximaOrdem = (status: Card['status']) => getCardsOrdenados(status).length + 1
+
   const handleDragEnd = async (result: DropResult) => {
     if (!podeEditar) return
     if (!result.destination) return
 
     const { source, destination, draggableId } = result
-    if (source.droppableId === destination.droppableId) return
-
-    const card = cards?.find(c => c.id === draggableId)
-    if (!card) return
-
+    const statusOrigem = source.droppableId as Card['status']
     const statusDestino = destination.droppableId as Card['status']
-    const statusOrigem = source.droppableId
 
-    await updateCard(draggableId, { ...card, status: statusDestino })
+    // Se não mudou nada, não faz nada
+    if (statusOrigem === statusDestino && source.index === destination.index) return
+
+    const origemOrdenada = getCardsOrdenados(statusOrigem)
+    const destinoOrdenada = statusOrigem === statusDestino ? origemOrdenada : getCardsOrdenados(statusDestino)
+
+    const cardMovido = origemOrdenada[source.index]
+    if (!cardMovido || cardMovido.id !== draggableId) {
+      // fallback: procurar pelo id, caso índices estejam divergentes
+      const fallback = (cards || []).find((c) => c.id === draggableId)
+      if (!fallback) return
+      origemOrdenada.splice(source.index, 0, fallback)
+    }
+
+    // Remove da origem e insere no destino no índice correto
+    const origemSemMovido = origemOrdenada.filter((c) => c.id !== draggableId)
+    const destinoComInsercao = (statusOrigem === statusDestino ? origemSemMovido : destinoOrdenada.filter((c) => c.id !== draggableId)).slice()
+    const cardInserido = { ...(cards || []).find((c) => c.id === draggableId)!, status: statusDestino }
+    destinoComInsercao.splice(destination.index, 0, cardInserido)
+
+    // Recalcular ordens (sequencial para evitar corrida de escrita no storage)
+    if (statusOrigem === statusDestino) {
+      for (let i = 0; i < destinoComInsercao.length; i++) {
+        const c = destinoComInsercao[i]
+        await updateCard(c.id, { ordem: i + 1 })
+      }
+    } else {
+      for (let i = 0; i < origemSemMovido.length; i++) {
+        const c = origemSemMovido[i]
+        await updateCard(c.id, { ordem: i + 1, status: statusOrigem })
+      }
+      for (let i = 0; i < destinoComInsercao.length; i++) {
+        const c = destinoComInsercao[i]
+        await updateCard(c.id, { ordem: i + 1, status: statusDestino })
+      }
+    }
     
     // Nomes amigáveis das colunas para a log
     const nomesColunas: Record<string, string> = {
@@ -70,18 +109,21 @@ export default function KanbanPage() {
       feito: 'Feito'
     }
 
-    // Log da movimentação
-    await logActivity(
-      'updated', 
-      'kanban', 
-      draggableId, 
-      card.titulo,
-      user?.login,
-      `Usuário ${user?.login || 'Sistema'} moveu o card '${card.titulo}' da coluna '${nomesColunas[statusOrigem]}' para '${nomesColunas[statusDestino]}'.`
-    )
+    // Log apenas quando mudou de coluna
+    if (statusOrigem !== statusDestino) {
+      const titulo = cardInserido?.titulo || (cards || []).find((c) => c.id === draggableId)?.titulo || 'Card'
+      await logActivity(
+        'updated',
+        'kanban',
+        draggableId,
+        titulo,
+        user?.login,
+        `Usuário ${user?.login || 'Sistema'} moveu o card '${titulo}' da coluna '${nomesColunas[statusOrigem]}' para '${nomesColunas[statusDestino]}'.`
+      )
+    }
 
     // Se moveu para "Feito", soltar confetes
-    if (statusDestino === 'feito') {
+    if (statusOrigem !== statusDestino && statusDestino === 'feito') {
       dispararConfete()
     }
 
@@ -100,6 +142,8 @@ export default function KanbanPage() {
   const handleCreate = async (dados: any) => {
     const novoCard = {
       ...dados,
+      tipo: normalizeKanbanTipo(dados?.tipo),
+      ordem: getProximaOrdem(dados?.status || 'fazer'),
       id: `card_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
     }
     const resultado = await createCard(novoCard)
@@ -122,7 +166,7 @@ export default function KanbanPage() {
   }
 
   const handleUpdate = async (dados: any) => {
-    const resultado = await updateCard(dados.id, dados)
+    const resultado = await updateCard(dados.id, { ...dados, tipo: normalizeKanbanTipo(dados?.tipo) })
     if (resultado) {
       await logActivity(
         'updated', 
@@ -200,6 +244,21 @@ export default function KanbanPage() {
         )}
       </div>
 
+      {/* Legenda dos Tipos */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4">
+        <h3 className="font-bold text-gray-900 mb-3">Legenda de Tipos</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {KANBAN_TIPOS.map((t) => (
+            <div key={t.value} className="flex items-start gap-3">
+              <span className={`mt-0.5 inline-flex items-center px-2 py-1 text-xs font-bold rounded-full border ${t.badgeClassName}`}>
+                {t.label}
+              </span>
+              <p className="text-sm text-gray-600 leading-snug">{t.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Kanban Board */}
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full pb-8">
@@ -222,9 +281,7 @@ export default function KanbanPage() {
                     ref={provided.innerRef}
                     className={`flex-1 space-y-3 transition-colors rounded-lg ${snapshot.isDraggingOver ? 'bg-gray-200/50' : ''}`}
                   >
-                    {(cards || [])
-                      .filter(card => card.status === coluna.id)
-                      .map((card, index) => (
+                    {getCardsOrdenados(coluna.id as Card['status']).map((card, index) => (
                         <Draggable 
                           key={card.id} 
                           draggableId={card.id} 
@@ -247,7 +304,15 @@ export default function KanbanPage() {
                                 {card.descricao}
                               </p>
 
-                              <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <div className="flex items-center justify-between gap-2">
+                                <span
+                                  className={`inline-flex items-center px-2 py-1 text-xs font-bold rounded-full border ${getKanbanTipoBadgeClassName(card.tipo)}`}
+                                  title={getKanbanTipoLabel(card.tipo)}
+                                >
+                                  {getKanbanTipoLabel(card.tipo)}
+                                </span>
+
+                                <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                 {podeEditar && (
                                   <>
                                     <button
@@ -291,6 +356,7 @@ export default function KanbanPage() {
                                     </button>
                                   </>
                                 )}
+                              </div>
                               </div>
                             </div>
                           )}
