@@ -470,27 +470,27 @@ export default function MilitaresPage() {
                 <thead>
                   <tr className="border-b border-gray-200">
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Nome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Matrícula</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Matrícula</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Cargo</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Data Admissão</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Ações</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Data Admissão</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {militaresOrdenados.map((militar) => (
                     <tr key={militar.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                       <td className="py-3 px-4 text-gray-900">{militar.nomeCompleto}</td>
-                      <td className="py-3 px-4 text-gray-600">{militar.matricula || '-'}</td>
+                      <td className="py-3 px-4 text-gray-600 text-center">{militar.matricula || '-'}</td>
                       <td className="py-3 px-4 text-gray-600">{militar.cargoNome || '-'}</td>
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-4 text-center">
                         <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(militar.status)}`}>
                           {militar.status}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-gray-600">{formatIsoToBr(militar.dataAdmissao)}</td>
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
+                      <td className="py-3 px-4 text-gray-600 text-center">{formatIsoToBr(militar.dataAdmissao)}</td>
+                      <td className="py-3 px-4 text-center">
+                        <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => router.push(`/dashboard/militares/${militar.id}`)}
                             className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"

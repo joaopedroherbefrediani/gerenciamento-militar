@@ -127,19 +127,26 @@ export default function CriarCardModal({
               <label htmlFor="tipo" className="block text-sm font-medium text-gray-700 mb-1">
                 Tipo
               </label>
-              <select
-                id="tipo"
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value as KanbanCardTipo)}
-                disabled={visualizarApenas}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none disabled:bg-gray-50"
-              >
-                {KANBAN_TIPOS.map((t) => (
-                  <option key={t.value} value={t.value}>
-                    {t.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  id="tipo"
+                  value={tipo}
+                  onChange={(e) => setTipo(e.target.value as KanbanCardTipo)}
+                  disabled={visualizarApenas}
+                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none disabled:bg-gray-50 appearance-none bg-white"
+                >
+                  {KANBAN_TIPOS.map((t) => (
+                    <option key={t.value} value={t.value}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             {!visualizarApenas && (
@@ -147,16 +154,23 @@ export default function CriarCardModal({
                 <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
                   Status
                 </label>
-                <select
-                  id="status"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value as 'fazer' | 'fazendo' | 'feito')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
-                >
-                  <option value="fazer">Fazer</option>
-                  <option value="fazendo">Fazendo</option>
-                  <option value="feito">Feito</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="status"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value as 'fazer' | 'fazendo' | 'feito')}
+                    className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none appearance-none bg-white"
+                  >
+                    <option value="fazer">Fazer</option>
+                    <option value="fazendo">Fazendo</option>
+                    <option value="feito">Feito</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -164,7 +178,7 @@ export default function CriarCardModal({
               <button
                 type="button"
                 onClick={onClose}
-                className={`flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium ${visualizarApenas ? 'bg-green-500 text-white hover:bg-green-600' : ''}`}
+                className="flex-1 px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
               >
                 {visualizarApenas ? 'Fechar' : 'Cancelar'}
               </button>

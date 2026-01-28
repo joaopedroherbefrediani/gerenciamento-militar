@@ -90,14 +90,21 @@ export default function CriarCursoModal({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Importância</label>
-              <select
-                value={importancia}
-                onChange={(e) => setImportancia(e.target.value as CursoImportancia)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
-              >
-                <option value="Basico">Básico</option>
-                <option value="Adicional">Adicional</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={importancia}
+                  onChange={(e) => setImportancia(e.target.value as CursoImportancia)}
+                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none appearance-none bg-white"
+                >
+                  <option value="Basico">Básico</option>
+                  <option value="Adicional">Adicional</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             <div className="flex gap-3 pt-4">

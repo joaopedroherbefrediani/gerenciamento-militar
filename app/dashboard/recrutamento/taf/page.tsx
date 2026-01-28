@@ -45,7 +45,7 @@ export default function RecrutamentoTAFPage() {
 
         <button
           onClick={() => router.push('/dashboard/recrutamento')}
-          className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium text-sm sm:text-base"
+          className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium text-sm sm:text-base"
         >
           Voltar
         </button>
@@ -90,7 +90,7 @@ export default function RecrutamentoTAFPage() {
             <a
               href="/recrutamento-taf.pdf"
               download
-              className="inline-flex items-center justify-center px-5 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-colors font-medium"
             >
               Baixar Manual
             </a>

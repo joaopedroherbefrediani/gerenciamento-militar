@@ -377,11 +377,11 @@ export default function AcoesPage() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Militar</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alvo/Local</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Alvo/Local</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -397,7 +397,7 @@ export default function AcoesPage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {acao.militarNome || 'N/A'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
                       <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
                         acao.tipo === 'Prisão' ? 'bg-red-100 text-red-800' :
                         acao.tipo === 'Curso' ? 'bg-blue-100 text-blue-800' :
@@ -407,13 +407,13 @@ export default function AcoesPage() {
                         {acao.tipo}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{acao.titulo}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{acao.alvoLocal}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 text-sm text-gray-900 text-center">{acao.titulo}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900 text-center">{acao.alvoLocal}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                       {formatarData(acao.data)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
+                      <div className="flex items-center justify-center gap-2">
                         <button
                           onClick={() => router.push(`/dashboard/acoes/${acao.id}`)}
                           className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"

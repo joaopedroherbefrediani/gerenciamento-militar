@@ -359,20 +359,27 @@ export default function CriarTemplateModal({
                       <label htmlFor="webhookId" className="block text-sm font-medium text-gray-700 mb-1">
                         Webhook
                       </label>
-                      <select
-                        id="webhookId"
-                        value={webhookId}
-                        onChange={(e) => setWebhookId(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
-                        required
-                      >
-                        <option value="">Selecione um webhook</option>
-                        {webhooks.map((webhook) => (
-                          <option key={webhook.id} value={webhook.id}>
-                            {webhook.nome}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select
+                          id="webhookId"
+                          value={webhookId}
+                          onChange={(e) => setWebhookId(e.target.value)}
+                          className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none appearance-none bg-white"
+                          required
+                        >
+                          <option value="">Selecione um webhook</option>
+                          {webhooks.map((webhook) => (
+                            <option key={webhook.id} value={webhook.id}>
+                              {webhook.nome}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                          <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
 
                     <div>
@@ -539,7 +546,7 @@ export default function CriarTemplateModal({
                 <div className="flex gap-3 pt-4 border-t border-gray-200">
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors font-medium flex items-center justify-center gap-2"
+                    className="flex-1 px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium flex items-center justify-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
@@ -549,7 +556,7 @@ export default function CriarTemplateModal({
                   <button
                     type="button"
                     onClick={handleSend}
-                    className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium flex items-center justify-center gap-2"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-colors font-medium flex items-center justify-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

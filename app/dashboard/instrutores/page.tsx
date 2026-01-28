@@ -247,12 +247,12 @@ export default function InstrutoresPage() {
                 <thead className="bg-gray-50">
                   <tr className="border-b border-gray-200">
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Nome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Preferência</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Preferência</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Cursos Preferidos</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Cursos Passados</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Recrutamentos Feitos</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Cursos Passados</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Recrutamentos Feitos</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-700">Horário</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-700">Ações</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -269,17 +269,17 @@ export default function InstrutoresPage() {
                     return (
                       <tr key={i.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                         <td className="py-3 px-4 text-gray-900 font-medium">{nome}</td>
-                        <td className="py-3 px-4 text-gray-700">{preferenciaTipoLabel(i)}</td>
+                        <td className="py-3 px-4 text-gray-700 text-center">{preferenciaTipoLabel(i)}</td>
                         <td className="py-3 px-4 text-gray-600 max-w-[320px] truncate" title={cursosLabel}>
                           {cursosLabel}
                         </td>
-                        <td className="py-3 px-4 text-gray-900">{i.cursosPassados || 0}</td>
-                        <td className="py-3 px-4 text-gray-900">{i.recrutamentosFeitos || 0}</td>
+                        <td className="py-3 px-4 text-gray-900 text-center">{i.cursosPassados || 0}</td>
+                        <td className="py-3 px-4 text-gray-900 text-center">{i.recrutamentosFeitos || 0}</td>
                         <td className="py-3 px-4 text-gray-600 max-w-[220px] truncate" title={i.horariosPreferidos || ''}>
                           {i.horariosPreferidos?.trim() ? i.horariosPreferidos : '—'}
                         </td>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-2">
+                        <td className="py-3 px-4 text-center">
+                          <div className="flex items-center justify-center gap-2">
                             {podeEditar ? (
                               <>
                                 <button

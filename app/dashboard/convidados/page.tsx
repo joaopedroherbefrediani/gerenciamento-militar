@@ -226,8 +226,8 @@ export default function ConvidadosPage() {
                 <th className="px-6 py-4 text-sm font-semibold text-gray-600">Nome</th>
                 <th className="px-6 py-4 text-sm font-semibold text-gray-600">Login</th>
                 <th className="px-6 py-4 text-sm font-semibold text-gray-600">Permissões</th>
-                <th className="px-6 py-4 text-sm font-semibold text-gray-600">Status</th>
-                <th className="px-6 py-4 text-sm font-semibold text-gray-600">Ações</th>
+                <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Status</th>
+                <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-center">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -253,13 +253,13 @@ export default function ConvidadosPage() {
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 text-center">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${user.status === 'Ativo' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                       {user.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2">
+                  <td className="px-6 py-4 text-center">
+                    <div className="flex items-center justify-center gap-2">
                       {podeEditar && (
                         <>
                           <button onClick={() => handleOpenModal(user)} className="p-2 text-gray-400 hover:text-blue-600 transition-colors">
@@ -413,7 +413,7 @@ export default function ConvidadosPage() {
                 <button
                   type="submit"
                   disabled={permissoesSelecionadas.length === 0}
-                  className="px-8 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-8 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium hover:from-green-600 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Salvar
                 </button>
