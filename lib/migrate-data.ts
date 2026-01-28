@@ -17,6 +17,7 @@ export async function migrateLocalStorageToAPI() {
       { key: 'eventos', endpoint: 'eventos' },
       { key: 'activities', endpoint: 'activities' },
       { key: 'kanban', endpoint: 'kanban' },
+      { key: 'instrutores', endpoint: 'instrutores' },
     ]
 
     for (const { key, endpoint } of entities) {

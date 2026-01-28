@@ -20,6 +20,7 @@ const dataFiles = [
   'provas.json',
   'eventos.json',
   'activities.json',
+  'instrutores.json',
 ]
 
 // Inicializar arquivos vazios se não existirem

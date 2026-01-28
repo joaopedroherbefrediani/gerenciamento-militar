@@ -12,6 +12,7 @@ export type ActivityEntity =
   | 'kanban'
   | 'curso'
   | 'curso_material'
+  | 'instrutor'
 
 export interface Activity {
   id: string

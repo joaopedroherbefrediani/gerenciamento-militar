@@ -63,6 +63,7 @@ export default function ConfirmarExclusaoModal({
               tipoItem === 'webhook' ? 'o webhook' :
               tipoItem === 'template' ? 'o template' :
               tipoItem === 'card' ? 'o card' :
+              tipoItem === 'instrutor' ? 'o instrutor' :
               'o item'
             } <span className="font-semibold">&quot;{itemNome || cargoNome}&quot;</span>?
             Esta ação não pode ser desfeita.

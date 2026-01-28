@@ -104,4 +104,7 @@ export const dataStore = {
 
   getCursosMateriais: () => readDataFile<any>('cursos-materiais.json'),
   saveCursosMateriais: (data: any[]) => writeDataFile('cursos-materiais.json', data),
+
+  getInstrutores: () => readDataFile<any>('instrutores.json'),
+  saveInstrutores: (data: any[]) => writeDataFile('instrutores.json', data),
 }

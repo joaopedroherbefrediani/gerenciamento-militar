@@ -97,6 +97,7 @@ export default function DashboardPage() {
       punicao: 'Punição',
       evento: 'Evento',
       webhook: 'Webhook',
+      instrutor: 'Instrutor',
     }
 
     const actionNames: Record<string, string> = {
@@ -127,6 +128,8 @@ export default function DashboardPage() {
         return `/dashboard/militares/${entityId}`
       case 'webhook':
         return `/dashboard/webhooks`
+      case 'instrutor':
+        return `/dashboard/instrutores`
       default:
         return '/dashboard'
     }

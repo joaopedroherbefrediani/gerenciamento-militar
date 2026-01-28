@@ -15,6 +15,7 @@ export const PERMISSOES_ROTAS: Record<string, string[]> = {
   '/dashboard/recrutamento': ['view_recrutamento'],
   '/dashboard/recrutamento/taf': ['view_recrutamento'],
   '/dashboard/cursos': ['view_cursos'],
+  '/dashboard/instrutores': ['view_instrutores'],
   '/dashboard/kanban': ['view_kanban'],
 }
 
@@ -45,6 +46,10 @@ export const PERMISSOES_ACOES: Record<string, string> = {
   'editar-kanban': 'edit_kanban',
   'excluir-kanban': 'edit_kanban',
   'mover-kanban': 'edit_kanban',
+
+  'criar-instrutor': 'edit_instrutores',
+  'editar-instrutor': 'edit_instrutores',
+  'excluir-instrutor': 'edit_instrutores',
 }
 
 // Verificar se o usuário tem permissão para acessar uma rota

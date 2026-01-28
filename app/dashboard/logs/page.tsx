@@ -66,6 +66,7 @@ export default function LogsPage() {
       kanban: 'Kanban',
       curso: 'Curso',
       curso_material: 'Material do Curso',
+      instrutor: 'Instrutor',
     }
     return traducoes[entity] || entity
   }
@@ -259,6 +260,9 @@ export default function LogsPage() {
                 <option value="template">Template</option>
                 <option value="convidado">Convidado</option>
                 <option value="kanban">Kanban</option>
+                <option value="curso">Curso</option>
+                <option value="curso_material">Material do Curso</option>
+                <option value="instrutor">Instrutor</option>
               </select>
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                 <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

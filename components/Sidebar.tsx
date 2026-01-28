@@ -131,6 +131,26 @@ const navItems: NavItem[] = [
     ),
   },
   {
+    name: 'Instrutores',
+    href: '/dashboard/instrutores',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 14l9-5-9-5-9 5 9 5z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 14l6.16-3.422A12.083 12.083 0 0119 15.156c0 1.657-.224 3.266-.64 4.788L12 17l-6.36 3.366A12.083 12.083 0 015 15.156c0-1.6.268-3.143.76-4.578L12 14z"
+        />
+      </svg>
+    ),
+  },
+  {
     name: 'Cursos',
     href: '/dashboard/cursos',
     icon: (
