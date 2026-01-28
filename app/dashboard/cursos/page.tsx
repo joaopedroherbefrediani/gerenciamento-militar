@@ -244,7 +244,7 @@ export default function CursosPage() {
                                 setCursoEditando(curso)
                                 setIsCriarModalOpen(true)
                               }}
-                              className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded transition-colors"
+                              className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded transition-colors"
                               title="Editar"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -261,7 +261,7 @@ export default function CursosPage() {
                                 setCursoParaExcluir(curso)
                                 setIsExcluirModalOpen(true)
                               }}
-                              className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                              className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
                               title="Excluir"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -337,7 +337,7 @@ export default function CursosPage() {
                       <a
                         href={href}
                         download
-                        className="inline-flex items-center justify-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium text-sm"
+                        className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-colors font-medium text-sm"
                       >
                         Baixar
                       </a>
