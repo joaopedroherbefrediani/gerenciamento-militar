@@ -8,7 +8,7 @@ const YOUTUBE_EMBED_URL = 'https://www.youtube-nocookie.com/embed/Gicy7Hx5ND4'
 
 export default function RecrutamentoTAFPage() {
   const { isAdmin, temPermissao } = usePermissions()
-  const podeAcessar = isAdmin || temPermissao('edit_recrutamento')
+  const podeAcessar = isAdmin || temPermissao('view_recrutamento')
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
 
@@ -92,13 +92,15 @@ export default function RecrutamentoTAFPage() {
         </div>
 
         {(isAdmin || temPermissao('edit_recrutamento')) && (
-          <a
-            href="/recrutamento-taf.pdf"
-            download
-            className="inline-flex items-center justify-center px-5 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
-          >
-            Baixar Manual
-          </a>
+          <div className="flex justify-center pt-2">
+            <a
+              href="/recrutamento-taf.pdf"
+              download
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
+            >
+              Baixar Manual
+            </a>
+          </div>
         )}
       </div>
     </div>

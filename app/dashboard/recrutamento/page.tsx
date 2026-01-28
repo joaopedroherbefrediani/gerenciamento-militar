@@ -191,7 +191,7 @@ type Prova = {
 export default function RecrutamentoPage() {
   const { isAdmin, temPermissao } = usePermissions()
   const podeVer = isAdmin || temPermissao('view_recrutamento')
-  const podeVerTAF = isAdmin || temPermissao('edit_recrutamento')
+  const podeVerTAF = podeVer
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
   const [nomeConscrito, setNomeConscrito] = useState('')
