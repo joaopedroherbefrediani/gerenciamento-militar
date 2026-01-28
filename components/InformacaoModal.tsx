@@ -32,7 +32,7 @@ export default function InformacaoModal({
         </div>
         <div className="p-6">
           <p className="text-gray-700 mb-6">{mensagem}</p>
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <button
               type="button"
               onClick={onClose}
