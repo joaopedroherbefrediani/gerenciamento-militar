@@ -14,6 +14,7 @@ type EntityType =
   | 'kanban'
   | 'cursos'
   | 'cursos-materiais'
+  | 'instrutores'
 
 interface UseDataSyncOptions {
   entity: EntityType
