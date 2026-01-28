@@ -162,9 +162,9 @@ export default function CriarInstrutorModal({
   if (!isOpen || !isClient) return null
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} contentClassName="max-w-2xl">
-      <div className="bg-white rounded-lg shadow-xl w-full">
-        <div className="p-6 border-b border-gray-200 flex items-center justify-between gap-4">
+    <BaseModal isOpen={isOpen} onClose={onClose} contentClassName="max-w-xl lg:max-w-2xl">
+      <div className="bg-white rounded-lg shadow-xl w-full max-h-[85dvh] sm:max-h-[90dvh] flex flex-col">
+        <div className="p-4 sm:p-6 border-b border-gray-200 flex items-center justify-between gap-4 shrink-0">
           <div>
             <h2 className="text-xl font-bold text-gray-900">{instrutorEditando ? 'Editar Instrutor' : 'Adicionar Instrutor'}</h2>
             <p className="text-sm text-gray-600 mt-1">
@@ -178,8 +178,8 @@ export default function CriarInstrutorModal({
           </button>
         </div>
 
-        <div className="p-6">
-          <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="flex-1 overflow-hidden flex flex-col">
+          <div className="p-4 sm:p-6 overflow-y-auto custom-scrollbar pr-2 space-y-5">
             {/* Militar */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -331,9 +331,11 @@ export default function CriarInstrutorModal({
                 placeholder="Ex: 19:00–23:00 (seg–sex) / finais de semana à tarde"
               />
             </div>
+          </div>
 
-            {/* Botões */}
-            <div className="flex gap-3 pt-2">
+          {/* Footer fixo */}
+          <div className="p-4 sm:p-6 border-t border-gray-200 bg-white shrink-0">
+            <div className="flex gap-3">
               <button
                 type="button"
                 onClick={onClose}
@@ -348,8 +350,8 @@ export default function CriarInstrutorModal({
                 {instrutorEditando ? 'Salvar' : 'Criar'}
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </BaseModal>
   )
