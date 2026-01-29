@@ -22,18 +22,7 @@ const ratelimit =
       })
     : null
 
-export async function middleware(request: NextRequest) {
-  // Rate limit apenas no login
-  if (request.nextUrl.pathname === '/api/auth/login' && ratelimit) {
-    const ip = getIp(request)
-    const { success } = await ratelimit.limit(`login:${ip}`)
-    if (!success) {
-      return new NextResponse('Muitas tentativas de login. Tente novamente mais tarde.', { status: 429 })
-    }
-  }
-
-  const response = NextResponse.next()
-
+function applySecurityHeaders(response: NextResponse) {
   // Security headers (aplicado globalmente)
   response.headers.set('X-Frame-Options', 'DENY')
   response.headers.set('X-Content-Type-Options', 'nosniff')
@@ -62,6 +51,53 @@ export async function middleware(request: NextRequest) {
       "connect-src 'self' https:",
     ].join('; ')
   )
+}
+
+export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+
+  // Rate limit apenas no login
+  if (pathname === '/api/auth/login' && ratelimit) {
+    const ip = getIp(request)
+    const { success } = await ratelimit.limit(`login:${ip}`)
+    if (!success) {
+      return new NextResponse('Muitas tentativas de login. Tente novamente mais tarde.', { status: 429 })
+    }
+  }
+
+  // Manter URLs "limpas" (sem /dashboard) mas renderizar as páginas existentes em /dashboard
+  // - Se alguém acessar /dashboard/*, redireciona para a URL sem o prefixo
+  if (pathname === '/dashboard' || pathname.startsWith('/dashboard/')) {
+    const url = request.nextUrl.clone()
+    const newPath = pathname.replace(/^\/dashboard/, '') || '/'
+    url.pathname = newPath
+    const response = NextResponse.redirect(url)
+    applySecurityHeaders(response)
+    return response
+  }
+
+  // Não reescrever rotas públicas/infra
+  const isBypass =
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname === '/favicon.ico' ||
+    pathname === '/login' ||
+    pathname === '/reset' ||
+    pathname === '/icon' ||
+    pathname === '/apple-icon'
+
+  // Reescrever tudo (inclusive "/") para "/dashboard/*"
+  if (!isBypass) {
+    const url = request.nextUrl.clone()
+    url.pathname = pathname === '/' ? '/dashboard' : `/dashboard${pathname}`
+    const response = NextResponse.rewrite(url)
+    applySecurityHeaders(response)
+    return response
+  }
+
+  const response = NextResponse.next()
+
+  applySecurityHeaders(response)
 
   return response
 }

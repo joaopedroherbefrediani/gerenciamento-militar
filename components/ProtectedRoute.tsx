@@ -28,7 +28,7 @@ export default function ProtectedRoute({
     // Se tem permissão específica, verificar
     if (requiredPermission) {
       if (!temPermissao(requiredPermission)) {
-        router.replace('/dashboard')
+        router.replace('/')
         return
       }
     }
@@ -39,7 +39,7 @@ export default function ProtectedRoute({
       if (permissoesNecessarias && permissoesNecessarias.length > 0) {
         const temAcesso = permissoesNecessarias.some((permissao) => temPermissao(permissao))
         if (!temAcesso) {
-          router.replace('/dashboard')
+          router.replace('/')
           return
         }
       }

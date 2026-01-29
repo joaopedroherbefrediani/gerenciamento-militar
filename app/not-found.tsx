@@ -26,7 +26,7 @@ export default function NotFound() {
           A página que você está procurando não existe ou foi movida.
         </p>
         <Link
-          href="/dashboard"
+          href="/"
           className="inline-block px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-colors font-medium"
         >
           Voltar para a Dashboard

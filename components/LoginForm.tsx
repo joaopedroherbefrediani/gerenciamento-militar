@@ -43,7 +43,7 @@ export default function LoginForm() {
       }
 
       // Redirecionar para dashboard usando replace para evitar loop
-      router.replace('/dashboard')
+      router.replace('/')
     } catch (err) {
       console.error('Erro no login:', err)
       setError('Erro ao conectar com o servidor. Verifique se o servidor está rodando.')

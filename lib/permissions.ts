@@ -2,21 +2,22 @@
 
 // Mapeamento de rotas para permissões necessárias
 export const PERMISSOES_ROTAS: Record<string, string[]> = {
-  '/dashboard/militares': ['view_militares'],
-  '/dashboard/cargos': ['view_cargos'],
-  '/dashboard/acoes': ['view_acoes'],
-  '/dashboard/infracoes': ['view_infracoes'],
-  '/dashboard/punicoes': ['view_punicoes'],
-  '/dashboard/relatorios': ['view_relatorios'],
-  '/dashboard/convidados': ['view_convidados'],
-  '/dashboard/webhooks': ['view_webhooks'],
-  '/dashboard/templates': ['view_templates'],
-  '/dashboard/logs': ['view_logs'],
-  '/dashboard/recrutamento': ['view_recrutamento'],
-  '/dashboard/recrutamento/taf': ['view_recrutamento'],
-  '/dashboard/cursos': ['view_cursos'],
-  '/dashboard/instrutores': ['view_instrutores'],
-  '/dashboard/kanban': ['view_kanban'],
+  '/': ['view_dashboard'],
+  '/militares': ['view_militares'],
+  '/cargos': ['view_cargos'],
+  '/acoes': ['view_acoes'],
+  '/infracoes': ['view_infracoes'],
+  '/punicoes': ['view_punicoes'],
+  '/relatorios': ['view_relatorios'],
+  '/convidados': ['view_convidados'],
+  '/webhooks': ['view_webhooks'],
+  '/templates': ['view_templates'],
+  '/logs': ['view_logs'],
+  '/recrutamento': ['view_recrutamento'],
+  '/recrutamento/taf': ['view_recrutamento'],
+  '/cursos': ['view_cursos'],
+  '/instrutores': ['view_instrutores'],
+  '/kanban': ['view_kanban'],
 }
 
 // Mapeamento de ações para permissões
