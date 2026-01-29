@@ -5,6 +5,7 @@
   "scripts": {
     "install:redis": "npm install redis",
     "dev": "next dev",
+    "prebuild": "node scripts/prebuild-vercel-fix.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
