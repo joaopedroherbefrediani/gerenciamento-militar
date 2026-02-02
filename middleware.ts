@@ -80,6 +80,7 @@ export async function middleware(request: NextRequest) {
   const isBypass =
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
+    pathname.startsWith('/midia/') ||
     pathname === '/favicon.ico' ||
     pathname === '/login' ||
     pathname === '/reset' ||
