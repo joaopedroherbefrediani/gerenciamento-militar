@@ -28,6 +28,7 @@ export default function LoginPage() {
       <video
         ref={videoRef}
         autoPlay
+        muted
         loop
         playsInline
         className="blur-sm"
