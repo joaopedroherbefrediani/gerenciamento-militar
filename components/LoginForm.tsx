@@ -26,14 +26,22 @@ export default function LoginForm() {
         body: JSON.stringify({ login, password }),
       })
 
-      // Verificar se a resposta é JSON válido
-      let data
-      try {
-        data = await response.json()
-      } catch (jsonError) {
-        setError('Erro ao processar resposta do servidor')
-        setLoading(false)
-        return
+      const contentType = response.headers.get('content-type') || ''
+      const rawText = await response.text()
+
+      let data: any = null
+      if (contentType.includes('application/json')) {
+        try {
+          data = JSON.parse(rawText)
+        } catch (jsonError) {
+          console.error('Erro ao fazer parse do JSON de login:', jsonError, rawText)
+        }
+      } else {
+        console.error('Resposta de login não é JSON. Detalhes:', {
+          status: response.status,
+          contentType,
+          preview: rawText.slice(0, 300),
+        })
       }
 
       if (!response.ok) {
